@@ -139,19 +139,6 @@ AddEventHandler(
 )
 
 ESX.RegisterServerCallback(
-	"otaku_vehicleshop:getSoldVehicles",
-	function(source, cb)
-		MySQL.Async.fetchAll(
-			"SELECT * FROM vehicle_sold",
-			{},
-			function(result)
-				cb(result)
-			end
-		)
-	end
-)
-
-ESX.RegisterServerCallback(
 	"otaku_vehicleshop:getCategories",
 	function(source, cb)
 		cb(Categories)
@@ -209,45 +196,33 @@ ESX.RegisterServerCallback(
 			cb(false)
 		end
 
+		local xPlayer = ESX.GetPlayerFromId(source)
+
 		MySQL.Async.fetchAll(
-			"SELECT * FROM rented_vehicles WHERE plate = @plate",
+			"SELECT * FROM owned_vehicles WHERE owner = @owner AND @plate = plate",
 			{
+				["@owner"] = xPlayer.identifier,
 				["@plate"] = plate
 			},
 			function(result)
-				if result[1] then -- is it a rented vehicle?
-					cb(false) -- it is, don't let the player sell it since he doesn't own it
-				else
-					local xPlayer = ESX.GetPlayerFromId(source)
+				if result[1] then -- does the owner match?
+					local vehicle = json.decode(result[1].vehicle)
+					if vehicle.model == model then
+						if vehicle.plate == plate then
+							xPlayer.addAccountMoney("bank", resellPrice)
+							RemoveOwnedVehicle(plate)
 
-					MySQL.Async.fetchAll(
-						"SELECT * FROM owned_vehicles WHERE owner = @owner AND @plate = plate",
-						{
-							["@owner"] = xPlayer.identifier,
-							["@plate"] = plate
-						},
-						function(result)
-							if result[1] then -- does the owner match?
-								local vehicle = json.decode(result[1].vehicle)
-								if vehicle.model == model then
-									if vehicle.plate == plate then
-										xPlayer.addAccountMoney("bank", resellPrice)
-										RemoveOwnedVehicle(plate)
-
-										cb(true)
-									else
-										print(("otaku_vehicleshop: %s attempted to sell an vehicle with plate mismatch!"):format(xPlayer.identifier))
-										cb(false)
-									end
-								else
-									print(("otaku_vehicleshop: %s attempted to sell an vehicle with model mismatch!"):format(xPlayer.identifier))
-									cb(false)
-								end
-							else
-								cb(false)
-							end
+							cb(true)
+						else
+							print(("otaku_vehicleshop: %s attempted to sell an vehicle with plate mismatch!"):format(xPlayer.identifier))
+							cb(false)
 						end
-					)
+					else
+						print(("otaku_vehicleshop: %s attempted to sell an vehicle with model mismatch!"):format(xPlayer.identifier))
+						cb(false)
+					end
+				else
+					cb(false)
 				end
 			end
 		)
