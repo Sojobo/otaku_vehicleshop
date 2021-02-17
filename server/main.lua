@@ -166,7 +166,8 @@ ESX.RegisterServerCallback(
 		end
 
 		if not vehicleData.instore then -- SABS time.
-			exports["sabs"]:banPlayer(source, "Exploiting #100 (" .. vehicleModel .. ")")
+		-- Place your automated banning system here, if you have one
+		-- exports["sabs"]:banPlayer(source, "Exploiting #100 (" .. vehicleModel .. ")")
 		end
 
 		if xPlayer.getAccount("bank").money >= vehicleData.price then
