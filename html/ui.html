@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
+		integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
+		crossorigin="anonymous" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js"
+		integrity="sha512-UwcC/iaz5ziHX7V6LjSKaXgCuRRqbTp1QHpbOJ4l1nw2/boCfZ2KlFIqBUA/uRVF0onbREnY9do8rM/uT/ilqw=="
+		crossorigin="anonymous"></script>
+	<link href="ui.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container mt-5" id="vehicleShop">
+		<div id="shopmenu" class="card mt-5 bg-dark" style="border:0;display:none">
+			<div class="card-header stbackground text-white unselectable" unselectable="on"
+				onselectstart="return false;" onmousedown="return false;">
+				<span class="shopTitle">Vehicle Shop</span>
+				<i id="close" class="float-right fa-2x fas fa-times-circle"></i>
+			</div>
+			<div class="row rowOverflow">
+				<div class="card-body unselectable col-2 carCategoryHolder" unselectable="on">
+					<a v-for="category in categories" class="carCategory"
+						:class="{ selected: (selectedCategory == category.name) }"
+						@click="switchCategory(category.name)">{{category.label}}</a>
+				</div>
+				<div class="card-body unselectable row showCaseBox" unselectable="on"
+					v-if="selectedCategory != 'ltdedition'">
+					<i id="page-prv" class="fas fa-angle-left fa-3x justify-content-center"
+						:class="{ end: !prevPageAvailable }" @click="prevPage"></i>
+					<div id="wrapper" class="card-deck showCaseWrapper">
+						<div class="row">
+							<div class="col" v-for="vehicle in currentVehicles.slice(0,3)">
+								<div class="card vehicleCard" style="border:0">
+									<span v-show="!vehicle.loaded">
+										<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+									</span>
+									<transition name="fade">
+										<img :src="vehicle.imglink" class="vehicleImage card-img-top"
+											@load="vehicle.loaded = true" v-show="vehicle.loaded">
+									</transition>
+									<div class="card-body">
+										<h5 class="card-title">{{vehicle.name}}</h5>
+										<p class="card-text">
+											Price: <b>${{vehicle.price | formatMoney}}</b><br>
+											Trunk: <b>{{vehicle.trunksize | formatMoney}}</b>
+										</p>
+										<p class="card-text"><button type="button" id="action1" data-id="`+ st + `"
+												class="btn btn-light btn-lg btn-block" data-toggle="modal"
+												data-target="#confirmVehiclePurchase"
+												@click="selectedVehicle = vehicle">
+												Purchase
+											</button>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col" v-for="vehicle in currentVehicles.slice(3,6)">
+								<div class="card vehicleCard" style="border:0">
+									<span v-show="!vehicle.loaded">
+										<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+									</span>
+									<transition name="fade">
+										<img :src="vehicle.imglink" class="vehicleImage card-img-top"
+											@load="vehicle.loaded = true" v-show="vehicle.loaded">
+									</transition>
+									<div class="card-body">
+										<h5 class="card-title">{{vehicle.name}}</h5>
+										<p class="card-text">
+											Price: <b>${{vehicle.price | formatMoney}}</b><br>
+											Trunk: <b>{{vehicle.trunksize | formatMoney}}</b>
+										</p>
+										<p class="card-text">
+											<button type="button" id="action1" data-id="`+ st + `"
+												class="btn btn-light btn-lg btn-block" data-toggle="modal"
+												data-target="#confirmVehiclePurchase"
+												@click="selectedVehicle = vehicle">
+												Purchase
+											</button>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<i id="page-nxt" class="fas fa-angle-right fa-3x justify-content-center"
+						:class="{ end: !nextPageAvailable }" @click="nextPage"></i>
+				</div>
+				<div class="card-body unselectable row showCaseBox ltdShowBox" unselectable="on"
+					:style="{ 'background-image': 'url(\'' + currentVehicles[0].imglink + '\')' }" v-else>
+					<h1 class="text-white">{{currentVehicles[0].name}}</h1>
+					<h3 class="text-white">Price: <b>${{currentVehicles[0].price | formatMoney}}</h3>
+					<p class="card-text ltdBuyBtn">
+						<button type="button" id="action1" class="btn btn-light btn-lg btn-block" data-toggle="modal"
+							data-target="#confirmVehiclePurchase" @click="selectedVehicle = currentVehicles[0]">
+							Purchase
+						</button>
+					</p>
+				</div>
+			</div>
+
+			<div class="modal fade" id="confirmVehiclePurchase" tabindex="-1" role="dialog"
+				aria-labelledby="confirmVehiclePurchaseTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">{{selectedVehicle.name}}</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							Are you sure you want to purchase this vehicle for ${{selectedVehicle.price | formatMoney}}?
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary" data-dismiss="modal"
+								@click="purchaseVehicle(selectedVehicle)">Purchase</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.min.js"
+		integrity="sha512-BKbSR+cfyxLdMAsE0naLReFSLg8/pjbgfxHh/k/kUC82Hy7r6HtR5hLhobaln2gcTvzkyyehrdREdjpsQwy2Jw=="
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"
+		integrity="sha512-XKa9Hemdy1Ui3KSGgJdgMyYlUg1gM+QhL6cnlyTe2qzMCYm4nAZ1PsVerQzTTXzonUR+dmswHqgJPuwCq1MaAg=="
+		crossorigin="anonymous"></script>
+	<script src="ui.js" type="text/javascript"></script>
+</body>
+
+</html>

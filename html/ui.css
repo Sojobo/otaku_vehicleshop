@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+
+body {
+    background-color: transparent;
+    font-family: Montserrat;
+}
+
+.container-fluid {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    left: 7.5vw;
+    top: 20vw;
+    transition: right 1.0s;
+}
+
+.container {
+    display: block;
+    top: 3vw;
+}
+
+.unselectable {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+    -o-user-select:none;
+}
+
+#page-nxt, #page-prv {
+    cursor: pointer;
+    margin: auto;
+    color: white!important;
+}
+
+#page-nxt.end, #page-prv.end {
+    color: #212529!important;
+    cursor: not-allowed;
+}
+
+#close {
+    cursor: pointer;
+}
+
+.stbackground {
+    background-color: #0085B2;
+    background-image: url("header.png");
+    background-repeat: no-repeat;
+    background-position: 0px 5px;
+}
+
+.shopTitle {
+    margin-left: 55px;
+    font-size: 24px;
+}
+
+.carCategoryHolder > a {
+    display: block;
+    cursor: pointer;
+    color: white!important;
+    padding: 5px 0 0 10px;
+}
+
+.vehicleCard {
+    width: 250px;
+    height: 305px;
+    margin: 0px!important;
+}
+
+.vehicleCard > span {
+    min-height: 140px;
+    margin: auto;
+    padding-top: 40px;
+}
+
+.vehicleImage {
+    max-height: 135px;
+}
+
+.selected {
+    font-weight: 800;
+}
+
+.showCaseBox {
+    width: 965px;
+    height: 674px;
+}
+
+.ltdShowBox {
+    flex-direction: column;
+    background-size: cover;
+    background-position: center;
+}
+
+.ltdShowBox > h1, .ltdShowBox > h3 {
+    text-shadow: 2px 2px 2px #000;
+    font-weight: 900;
+}
+
+.ltdBuyBtn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.showCaseWrapper {
+    width: 810px;
+    height: 634px;
+}
+
+.rowOverflow {
+    overflow: hidden;
+    margin-right: 0px!important;
+}
+
+.fade-enter-active {
+    transition: opacity 1s ease-in-out;
+}
+
+.fade-enter-to {
+    opacity: 1;
+}
+
+.fade-enter {
+    opacity: 0;
+}
