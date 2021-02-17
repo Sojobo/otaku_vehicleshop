@@ -12,6 +12,32 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+-- Dumping structure for table strp.vehicle_categories
+DROP TABLE IF EXISTS `vehicle_categories`;
+CREATE TABLE IF NOT EXISTS `vehicle_categories` (
+  `name` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `label` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table strp.vehicle_categories: ~12 rows (approximately)
+DELETE FROM `vehicle_categories`;
+/*!40000 ALTER TABLE `vehicle_categories` DISABLE KEYS */;
+INSERT INTO `vehicle_categories` (`name`, `label`) VALUES
+	('compacts', 'Compacts'),
+	('coupes', 'Coupés'),
+	('ltdedition', 'Limited Edition'),
+	('motorcycles', 'Motorbikes'),
+	('muscle', 'Muscle'),
+	('offroad', 'Off Road'),
+	('sedans', 'Sedans'),
+	('sports', 'Sports'),
+	('sportsclassics', 'Sports Classics'),
+	('suvs', 'SUVs'),
+	('vans', 'Vans'),
+	('vips', 'Super');
+/*!40000 ALTER TABLE `vehicle_categories` ENABLE KEYS */;
+
 -- Dumping structure for table strp.vehicles
 DROP TABLE IF EXISTS `vehicles`;
 CREATE TABLE IF NOT EXISTS `vehicles` (
