@@ -3,7 +3,7 @@ game "gta5"
 
 author "Sojobo#0001"
 description "Otaku Vehicle Shop"
-version "1.0.0"
+version "1.1.0"
 
 dependency "es_extended"
 ui_page "html/ui.html"
