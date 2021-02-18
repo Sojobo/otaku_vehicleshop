@@ -12,7 +12,8 @@ files {
 	"html/ui.html",
 	"html/ui.css",
 	"html/ui.js",
-	"html/header.png"
+	"html/header.png",
+	"version.json"
 }
 
 server_scripts {
