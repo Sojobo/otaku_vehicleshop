@@ -3,12 +3,10 @@
 
 <head>
 	<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
-		integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
-		crossorigin="anonymous" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js"
-		integrity="sha512-UwcC/iaz5ziHX7V6LjSKaXgCuRRqbTp1QHpbOJ4l1nw2/boCfZ2KlFIqBUA/uRVF0onbREnY9do8rM/uT/ilqw=="
-		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+		integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<link href="ui.css" type="text/css" rel="stylesheet">
 </head>
 
@@ -50,10 +48,7 @@
 										<p class="card-text"><button type="button" id="action1" data-id="`+ st + `"
 												class="btn btn-light btn-lg btn-block" data-toggle="modal"
 												data-target="#confirmVehiclePurchase"
-												@click="selectedVehicle = vehicle">
-												Purchase
-											</button>
-										</p>
+												@click="selectedVehicle = vehicle">Purchase</button></p>
 									</div>
 								</div>
 							</div>
@@ -74,14 +69,10 @@
 											Price: <b>${{vehicle.price | formatMoney}}</b><br>
 											Trunk: <b>{{vehicle.trunksize | formatMoney}}</b>
 										</p>
-										<p class="card-text">
-											<button type="button" id="action1" data-id="`+ st + `"
+										<p class="card-text"><button type="button" id="action1" data-id="`+ st + `"
 												class="btn btn-light btn-lg btn-block" data-toggle="modal"
 												data-target="#confirmVehiclePurchase"
-												@click="selectedVehicle = vehicle">
-												Purchase
-											</button>
-										</p>
+												@click="selectedVehicle = vehicle">Purchase</button></p>
 									</div>
 								</div>
 							</div>
@@ -96,9 +87,8 @@
 					<h3 class="text-white">Price: <b>${{currentVehicles[0].price | formatMoney}}</h3>
 					<p class="card-text ltdBuyBtn">
 						<button type="button" id="action1" class="btn btn-light btn-lg btn-block" data-toggle="modal"
-							data-target="#confirmVehiclePurchase" @click="selectedVehicle = currentVehicles[0]">
-							Purchase
-						</button>
+							data-target="#confirmVehiclePurchase"
+							@click="selectedVehicle = currentVehicles[0]">Purchase</button>
 					</p>
 				</div>
 			</div>
@@ -126,11 +116,9 @@
 			</div>
 		</div>
 	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.min.js"
-		integrity="sha512-BKbSR+cfyxLdMAsE0naLReFSLg8/pjbgfxHh/k/kUC82Hy7r6HtR5hLhobaln2gcTvzkyyehrdREdjpsQwy2Jw=="
-		crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"
-		integrity="sha512-XKa9Hemdy1Ui3KSGgJdgMyYlUg1gM+QhL6cnlyTe2qzMCYm4nAZ1PsVerQzTTXzonUR+dmswHqgJPuwCq1MaAg=="
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
 	<script src="ui.js" type="text/javascript"></script>
 </body>
