@@ -38,6 +38,11 @@ INSERT INTO `vehicle_categories` (`name`, `label`) VALUES
 	('vips', 'Super');
 /*!40000 ALTER TABLE `vehicle_categories` ENABLE KEYS */;
 
+/*!40000 ALTER TABLE `owned_vehicles` ADD VEHICLENAME */;
+ALTER TABLE `owned_vehicles`
+  ADD COLUMN `vehiclename` varchar(60) NOT NULL;
+
+
 -- Dumping structure for table strp.vehicles
 DROP TABLE IF EXISTS `vehicles`;
 CREATE TABLE IF NOT EXISTS `vehicles` (
