@@ -1,8 +1,10 @@
 Config = {}
+Config.Locale = "en"
+Config.VehicleshopInterior = false --Set this to true if the vehicleshop interior does not load!
 Config.DrawDistance = 100.0
 Config.ResellPercentage = 70
-Config.Locale = "en"
 Config.versionCheck = true
+
 
 Config.Zones = {
 	ShopEntering = {

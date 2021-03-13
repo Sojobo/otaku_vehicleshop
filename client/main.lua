@@ -9,6 +9,17 @@ local Vehicles = {}
 local SaleVehicles = {}
 ESX = nil
 
+if Config.VehicleshopInterior then --Checks if Config.VehicleshopInterior is set to true/false
+	Citizen.CreateThread(function()
+	    RequestIpl('shr_int') -- Load walls and floor
+
+	    local interiorID = 7170
+	    LoadInterior(interiorID)
+	    EnableInteriorProp(interiorID, 'csr_beforeMission') -- Load large window
+	    RefreshInterior(interiorID)
+	end)
+end
+
 Citizen.CreateThread(
 	function()
 		while ESX == nil do
