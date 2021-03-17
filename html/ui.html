@@ -81,8 +81,8 @@
 					<i id="page-nxt" class="fas fa-angle-right fa-3x justify-content-center"
 						:class="{ end: !nextPageAvailable }" @click="nextPage"></i>
 				</div>
-				<div class="card-body unselectable row showCaseBox ltdShowBox" unselectable="on"
-					:style="{ 'background-image': 'url(\'' + currentVehicles[0].imglink + '\')' }" v-else>
+				<div v-else-if="currentVehicles[0]" class="card-body unselectable row showCaseBox ltdShowBox"
+					unselectable="on" :style="{ 'background-image': 'url(\'' + currentVehicles[0].imglink + '\')' }">
 					<h1 class="text-white">{{currentVehicles[0].name}}</h1>
 					<h3 class="text-white">Price: <b>${{currentVehicles[0].price | formatMoney}}</h3>
 					<p class="card-text ltdBuyBtn">

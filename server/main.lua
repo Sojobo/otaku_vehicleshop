@@ -1,6 +1,7 @@
 ESX = nil
 local Categories = {}
 local Vehicles = {}
+local shopLoading = true
 
 TriggerEvent(
 	"esx:getSharedObject",
@@ -34,7 +35,7 @@ MySQL.ready(
 				end
 			end
 
-			if (vehicle.hash == "") then
+			if (vehicle.hash == "" or vehicle.hash == 0) then
 				vehicle.hash = GetHashKey(vehicle.model)
 				MySQL.Async.execute(
 					"UPDATE vehicles SET hash = @hash WHERE model = @model",
@@ -51,6 +52,7 @@ MySQL.ready(
 		-- send information after db has loaded, making sure everyone gets vehicle information
 		TriggerClientEvent("otaku_vehicleshop:sendCategories", -1, Categories)
 		TriggerClientEvent("otaku_vehicleshop:sendVehicles", -1, Vehicles)
+		shopLoading = false
 	end
 )
 
@@ -141,6 +143,10 @@ AddEventHandler(
 ESX.RegisterServerCallback(
 	"otaku_vehicleshop:getCategories",
 	function(source, cb)
+		while shopLoading do
+			Citizen.Wait(100)
+		end
+
 		cb(Categories)
 	end
 )
@@ -148,6 +154,10 @@ ESX.RegisterServerCallback(
 ESX.RegisterServerCallback(
 	"otaku_vehicleshop:getVehicles",
 	function(source, cb)
+		while shopLoading do
+			Citizen.Wait(100)
+		end
+
 		cb(Vehicles)
 	end
 )
@@ -248,7 +258,7 @@ ESX.RegisterServerCallback(
 Citizen.CreateThread(
 	function()
 		local vRaw = LoadResourceFile(GetCurrentResourceName(), "version.json")
-		if vRaw and Config.versionCheck then
+		if vRaw and Config.VersionCheck then
 			local v = json.decode(vRaw)
 			PerformHttpRequest(
 				"https://raw.githubusercontent.com/Sojobo/otaku_vehicleshop/main/version.json",
@@ -271,7 +281,7 @@ CHANGELOG: %s
 							)
 						end
 					else
-						print("otaku_vehicleshop unable to check version")
+						print("otaku_vehicleshop was unable to check version")
 					end
 				end,
 				"GET"

@@ -10,14 +10,16 @@ local SaleVehicles = {}
 ESX = nil
 
 if Config.VehicleshopInterior then --Checks if Config.VehicleshopInterior is set to true/false
-	Citizen.CreateThread(function()
-	    RequestIpl('shr_int') -- Load walls and floor
+	Citizen.CreateThread(
+		function()
+			RequestIpl("shr_int") -- Load walls and floor
 
-	    local interiorID = 7170
-	    LoadInterior(interiorID)
-	    EnableInteriorProp(interiorID, 'csr_beforeMission') -- Load large window
-	    RefreshInterior(interiorID)
-	end)
+			local interiorID = 7170
+			LoadInterior(interiorID)
+			EnableInteriorProp(interiorID, "csr_beforeMission") -- Load large window
+			RefreshInterior(interiorID)
+		end
+	)
 end
 
 Citizen.CreateThread(
@@ -136,17 +138,21 @@ RegisterNUICallback(
 )
 
 function OpenShopMenu()
-	local vehicle = {}
-
 	if not IsInShopMenu then
 		IsInShopMenu = true
 		SetNuiFocus(true, true)
+
+		local selectedCategory = "ltdedition"
+		if not Config.LtdEditions then
+			selectedCategory = Categories[1].name
+		end
 
 		SendNUIMessage(
 			{
 				show = true,
 				cars = SaleVehicles,
-				categories = Categories
+				categories = Categories,
+				selectedCategory = selectedCategory
 			}
 		)
 	end
@@ -316,6 +322,10 @@ Citizen.CreateThread(
 Citizen.CreateThread(
 	function()
 		local waitTime = 500
+		while SaleVehicles == {} or Categories == {} do
+			Citizen.Wait(200)
+		end
+
 		while true do
 			Citizen.Wait(waitTime)
 			waitTime = 500

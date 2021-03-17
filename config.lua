@@ -1,10 +1,10 @@
 Config = {}
 Config.Locale = "en"
-Config.VehicleshopInterior = false --Set this to true if the vehicleshop interior does not load!
+Config.VehicleshopInterior = false -- Set this to true if the vehicleshop interior does not load!
 Config.DrawDistance = 100.0
 Config.ResellPercentage = 70
-Config.versionCheck = true
-
+Config.LtdEditions = true -- If you remove the ltdedition category (i.e. the splash page for 1 special car), set this to false
+Config.VersionCheck = true
 
 Config.Zones = {
 	ShopEntering = {
