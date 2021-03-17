@@ -32,5 +32,8 @@ Pull requests and feature requests are always welcome.
 
 Discord: https://discord.gg/EMeDvZ7FVV
 
+For anyone wondering what to do about the hash column in the database just leave it empty the server will auto populate it on startup!
+
+and for anyone having trouble with the database not wanting to save the vehicle when hash is left empty silpy put a 0 in hash and let it save and just remove the 0 right after leaving it empty!
+
 [![Otaku Vehicleshop](https://i.imgur.com/sUexFGm.png)](https://www.youtube.com/watch?v=o1ak6P9nf98 "Otaku Vehicleshop")
-s
