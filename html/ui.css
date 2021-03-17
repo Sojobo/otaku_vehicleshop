@@ -37,6 +37,7 @@ body {
 #page-nxt.end, #page-prv.end {
     color: #212529!important;
     cursor: not-allowed;
+    opacity: 0;
 }
 
 #close {

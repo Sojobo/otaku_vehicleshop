@@ -34,8 +34,6 @@ Citizen.CreateThread(
 			Citizen.Wait(0)
 		end
 
-		Citizen.Wait(10000)
-
 		ESX.TriggerServerCallback(
 			"otaku_vehicleshop:getCategories",
 			function(categories)
@@ -48,6 +46,7 @@ Citizen.CreateThread(
 			function(vehicles)
 				Vehicles = vehicles
 
+				SaleVehicles = {}
 				for k, v in pairs(vehicles) do
 					if v.instore then
 						table.insert(SaleVehicles, v)
@@ -72,6 +71,7 @@ AddEventHandler(
 	function(vehicles)
 		Vehicles = vehicles
 
+		SaleVehicles = {}
 		for k, v in pairs(vehicles) do
 			if v.instore then
 				table.insert(SaleVehicles, v)
@@ -277,6 +277,10 @@ Citizen.CreateThread(
 Citizen.CreateThread(
 	function()
 		local waitTime = 500
+		while SaleVehicles == {} or Categories == {} do
+			Citizen.Wait(200)
+		end
+
 		while true do
 			Citizen.Wait(waitTime)
 			waitTime = 500

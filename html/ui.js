@@ -77,7 +77,6 @@ var app = new Vue({
 });
 
 function CloseShop() {
-    $("#wrapper").html('');
     $("#shopmenu").hide();
     $.post('http://otaku_vehicleshop/CloseMenu', JSON.stringify({}));
 }
@@ -101,7 +100,7 @@ $(document).ready(function () {
 
         if (data.show) {
             $("#shopmenu").show();
-            app.currentVehicles = app.getVehiclesInCategory(app.selectedCategory, 0);
+            app.switchCategory(app.selectedCategory)
         }
     });
 });
