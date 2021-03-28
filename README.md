@@ -12,6 +12,8 @@ I use this as a "Limited Edition" cover page on my server
 Modify to your liking or contribute to the github directly through PRs
 - **Version Checking**
 Automatic version checking makes sure you don't fall behind with any important updates!
+- **Optiona JobVehicleSpawn Support**
+Config.PoliceJob = false Set this to true if you want esx_policejob to work correctly! should work with other policejobs and/or other jobs that require vehicle spawning
 
 ## Requirements
 
