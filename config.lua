@@ -1,6 +1,7 @@
 Config = {}
 Config.Locale = "en"
 Config.VehicleshopInterior = false -- Set this to true if the vehicleshop interior does not load!
+Config.PoliceJob = false -- Set this to true if using esx_policejob
 Config.DrawDistance = 100.0
 Config.ResellPercentage = 70
 Config.LtdEditions = true -- If you remove the ltdedition category (i.e. the splash page for 1 special car), set this to false
