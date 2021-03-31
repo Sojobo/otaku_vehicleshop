@@ -66,7 +66,7 @@ DROP TABLE IF EXISTS `vehicles`;
 CREATE TABLE IF NOT EXISTS `vehicles` (
   `name` varchar(60) NOT NULL,
   `model` varchar(60) NOT NULL,
-  `hash` varchar(60) NOT NULL,
+  `hash` varchar(60) NOT NULL DEFAULT '',
   `price` int(11) NOT NULL,
   `category` varchar(60) DEFAULT NULL,
   `imglink` text,
