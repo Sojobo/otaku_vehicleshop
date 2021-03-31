@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `vehicles` (
 DELETE FROM `vehicles`;
 /*!40000 ALTER TABLE `vehicles` DISABLE KEYS */;
 INSERT INTO `vehicles` (`name`, `model`, `hash`, `price`, `category`, `imglink`, `instore`, `trunksize`, `rarity`, `stock`) VALUES
-	('Adder', 'adder', '-1216765807', 1000000, 'vips', 'https://i.imgur.com/dPxjhuH.png', 1, 25000, 'common', 1);
+	('Adder', 'adder', '-1216765807', 1000000, 'ltdedition', 'https://i.imgur.com/dPxjhuH.png', 1, 25000, 'common', 1);
 /*!40000 ALTER TABLE `vehicles` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
