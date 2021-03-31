@@ -35,7 +35,7 @@ MySQL.ready(
 				end
 			end
 
-			if (vehicle.hash == "" or vehicle.hash == 0) then
+			if (vehicle.hash == "" or vehicle.hash == "0") then
 				vehicle.hash = GetHashKey(vehicle.model)
 				MySQL.Async.execute(
 					"UPDATE vehicles SET hash = @hash WHERE model = @model",
@@ -256,32 +256,46 @@ ESX.RegisterServerCallback(
 )
 
 if Config.PoliceJob then
-	ESX.RegisterServerCallback('otaku_vehicleshop:retrieveJobVehicles', function(source, cb, type)
-		local xPlayer = ESX.GetPlayerFromId(source)
+	ESX.RegisterServerCallback(
+		"otaku_vehicleshop:retrieveJobVehicles",
+		function(source, cb, type)
+			local xPlayer = ESX.GetPlayerFromId(source)
 
-		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND type = @type AND job = @job', {
-			['@owner'] = xPlayer.identifier,
-			['@type'] = type,
-			['@job'] = xPlayer.job.name
-		}, function(result)
-			cb(result)
-		end)
-	end)
+			MySQL.Async.fetchAll(
+				"SELECT * FROM owned_vehicles WHERE owner = @owner AND type = @type AND job = @job",
+				{
+					["@owner"] = xPlayer.identifier,
+					["@type"] = type,
+					["@job"] = xPlayer.job.name
+				},
+				function(result)
+					cb(result)
+				end
+			)
+		end
+	)
 
-	RegisterNetEvent('otaku_vehicleshop:setJobVehicleState')
-	AddEventHandler('otaku_vehicleshop:setJobVehicleState', function(plate, state)
-		local xPlayer = ESX.GetPlayerFromId(source)
+	RegisterNetEvent("otaku_vehicleshop:setJobVehicleState")
+	AddEventHandler(
+		"otaku_vehicleshop:setJobVehicleState",
+		function(plate, state)
+			local xPlayer = ESX.GetPlayerFromId(source)
 
-		MySQL.Async.execute('UPDATE owned_vehicles SET `stored` = @stored WHERE plate = @plate AND job = @job', {
-			['@stored'] = state,
-			['@plate'] = plate,
-			['@job'] = xPlayer.job.name
-		}, function(rowsChanged)
-			if rowsChanged == 0 then
-				print(('[otaku_vehicleshop] [^3WARNING^7] %s exploited the garage!'):format(xPlayer.identifier))
-			end
-		end)
-	end)
+			MySQL.Async.execute(
+				"UPDATE owned_vehicles SET `stored` = @stored WHERE plate = @plate AND job = @job",
+				{
+					["@stored"] = state,
+					["@plate"] = plate,
+					["@job"] = xPlayer.job.name
+				},
+				function(rowsChanged)
+					if rowsChanged == 0 then
+						print(("[otaku_vehicleshop] [^3WARNING^7] %s exploited the garage!"):format(xPlayer.identifier))
+					end
+				end
+			)
+		end
+	)
 end
 
 Citizen.CreateThread(
