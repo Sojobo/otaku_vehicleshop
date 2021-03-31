@@ -38,10 +38,10 @@ INSERT INTO `vehicle_categories` (`name`, `label`) VALUES
 	('vips', 'Super');
 /*!40000 ALTER TABLE `vehicle_categories` ENABLE KEYS */;
 
---ALTER TABLE `owned_vehicles`
+-- ALTER TABLE `owned_vehicles`
 --  ADD COLUMN `vehiclename` varchar(60) NOT NULL;
 
---If you already have owned_vehicles comment out the section below and uncomment the 2 lines above
+-- If you already have owned_vehicles comment out the section below and uncomment the 2 lines above
 DROP TABLE IF EXISTS `owned_vehicles`;
 CREATE TABLE IF NOT EXISTS `owned_vehicles` (
   `vehicle` longtext NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `owned_vehicles` (
   KEY `vehsowned` (`owner`),
   KEY `carOwner` (`owner`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
---End of owned_vehicles Section!
+-- End of owned_vehicles Section!
 
 -- Dumping structure for table strp.vehicles
 DROP TABLE IF EXISTS `vehicles`;
