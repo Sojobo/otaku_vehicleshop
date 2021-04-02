@@ -51,17 +51,19 @@ ESX.TriggerServerCallback('otaku_vehicleshop:retrieveJobVehicles', function(jobV
 
 Then do the same for the rest
 
+Search for this:
+
 TriggerServerEvent('esx_vehicleshop:setJobVehicleState', data2.current.plate, false)
 
-To:
+and replace esx_vehicleshop with otaku_vehicleshop:
 
 TriggerServerEvent('otaku_vehicleshop:setJobVehicleState', data2.current.plate, false)
 
-And this:
+Search for this:
 
 local newPlate = exports['esx_vehicleshop']:GeneratePlate()
 
-To This:
+and once again replace esx_vehicleshop with otaku_vehicleshop:
 
 local newPlate = exports['otaku_vehicleshop']:GeneratePlate()
 
