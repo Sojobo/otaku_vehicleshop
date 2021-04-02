@@ -34,7 +34,37 @@ Pull requests and feature requests are always welcome.
 
 Discord: https://discord.gg/EMeDvZ7FVV
 
-For anyone wondering what to do about the hash column in the database just leave it empty the server will auto populate it on startup!
+For anyone wondering what to do about the hash column in the database just leave it empty and the server will auto populate it on startup!
 And for anyone having trouble with the database not wanting to save the vehicle when hash is left empty simply put a 0 in hash and let it save and just remove the 0 right after!
 
+## If you're using esx_policejob follow this guide
+
+go to esx_policejob/client/vehicle.lua
+
+Ctrl + F to search and search for:
+
+ESX.TriggerServerCallback('esx_vehicleshop:retrieveJobVehicles', function(jobVehicles)
+
+and replace esx_vehicleshop with otaku_vehicleshop so it looks like this:
+
+ESX.TriggerServerCallback('otaku_vehicleshop:retrieveJobVehicles', function(jobVehicles)
+
+Then do the same for the rest
+
+TriggerServerEvent('esx_vehicleshop:setJobVehicleState', data2.current.plate, false)
+
+To:
+
+TriggerServerEvent('otaku_vehicleshop:setJobVehicleState', data2.current.plate, false)
+
+And this:
+
+local newPlate = exports['esx_vehicleshop']:GeneratePlate()
+
+To This:
+
+local newPlate = exports['otaku_vehicleshop']:GeneratePlate()
+
+
+## Preview video of the script
 [![Otaku Vehicleshop](https://i.imgur.com/sUexFGm.png)](https://www.youtube.com/watch?v=o1ak6P9nf98 "Otaku Vehicleshop")
