@@ -245,10 +245,7 @@ AddEventHandler(
 			if IsInShopMenu then
 				ESX.UI.Menu.CloseAll()
 
-				DeleteShopInsideVehicles()
-
 				local playerPed = PlayerPedId()
-
 				FreezeEntityPosition(playerPed, false)
 				SetEntityVisible(playerPed, true)
 				SetEntityCoords(playerPed, Config.Zones.ShopEntering.Pos.x, Config.Zones.ShopEntering.Pos.y, Config.Zones.ShopEntering.Pos.z)
